@@ -7,6 +7,7 @@ router.use(cors());
 
 //-------------------------------------UPDATE USER----------------------------------------
 router.put("/:id", async (req, res) => {
+    console.log(req.body);
     if (req.body._id === req.params.id || req.body.isAdmin) {
 
         //------------if password in body hash password--------------

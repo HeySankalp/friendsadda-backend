@@ -36,24 +36,14 @@ router.put("/:id", async (req, res) => {
 });
 
 //------------------------------delete a post-----------------------------------
-router.delete("/:id/:postowner/:postpic", async (req, res) => {
+router.delete("/:id/:postowner", async (req, res) => {
     const post = await Post.findById(req.params.id);
     try {
         if (post.user_id === req.params.postowner) {
             await post.deleteOne();
-            //-----------delete file from server------------
-            if (req.params.postpic) {
-                const filepath = `./public/images/post/${req.params.postpic}`;
-                fs.unlink(filepath, callback);
-                function callback(error) {
-                    if(error){
-                        res.status(200).json("file can't be deleted")
-                    }
-                    res.status(200).json("delted succesfully")
-                }
-            }
+            res.status(200).json("post deelted successfully");
         } else {
-            res.status(200).json("you can delete only your post");
+            res.status(403).json("you can delete only your post");
         }
     } catch (err) {
         console.error(err);
