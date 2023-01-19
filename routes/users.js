@@ -146,4 +146,8 @@ router.put("/:id/unfollow", async (req, res) => {
         res.status(403).json("you can't unfollow yourself");
     }
 })
+
+router.get("/backcheck", async (req, res) => {
+            res.status(200).send("Congrats backend working");
+})
 module.exports = router
